@@ -5,7 +5,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.widget.Toast;
 
-import com.ringares.coins.Application.MyApplication;
+import com.ringares.coins.application.MyApplication;
 
 /**
  * Created by ls
@@ -24,7 +24,7 @@ public class Utils {
     }
 
     /**
-     * dip ×ª»»³É px
+     * dip2px
      */
     public static float dip2Pixel(float dip, Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();

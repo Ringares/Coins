@@ -1,5 +1,7 @@
 package com.ringares.coins.ui;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -8,7 +10,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +19,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.ringares.coins.R;
 import com.ringares.coins.utils.Utils;
@@ -34,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //statusBarCloor
+        //setStatusBarColor();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -61,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
             Adapter adapter = new Adapter(getSupportFragmentManager());
-            adapter.addFragment(new ListFragment(), "Category 1");
-            adapter.addFragment(new ListFragment(), "Category 2");
+            adapter.addFragment(new TimeLineFragment(), "Time-Line");
+            adapter.addFragment(new TimeLineFragment(), "Charts");
             viewPager.setAdapter(adapter);
         }
 
@@ -78,6 +85,28 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         if (viewPager != null){
             tabLayout.setupWithViewPager(viewPager);
+        }
+    }
+
+    private void setStatusBarColor() {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            /**透明导航栏*/
+            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){/**5.0及以上*/
+                Window window = getWindow();
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                        | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.TRANSPARENT);
+            }else{/**5.0以下*/
+                Window win = getWindow();
+                WindowManager.LayoutParams winParams = win.getAttributes();
+                int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+                winParams.flags |= bits;
+                win.setAttributes(winParams);
+            }
         }
     }
 
