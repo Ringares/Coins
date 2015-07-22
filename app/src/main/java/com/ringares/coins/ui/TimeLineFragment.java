@@ -1,6 +1,7 @@
 package com.ringares.coins.ui;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 import com.ringares.coins.Application.MyApplication;
 import com.ringares.coins.R;
-import com.ringares.coins.utils.Utils;
+import com.ringares.coins.utils.IconFontTextView;
 
 public class TimeLineFragment extends Fragment {
     private RecyclerViewAdapter adapter;
@@ -46,10 +47,12 @@ public class TimeLineFragment extends Fragment {
                 super(view);
                 iv = (ImageView) view.findViewById(R.id.iv);
                 tv = (TextView) view.findViewById(R.id.tv);
+                Typeface tf= Typeface.createFromAsset(MyApplication.context.getResources().getAssets(),"MDIconFont.ttf");
+                tv.setTypeface(tf);
             }
 
             public void setData(int index) {
-                tv.setText(index+"");
+                tv.setText(IconFontTextView.PLUS);
             }
         }
 
@@ -63,7 +66,6 @@ public class TimeLineFragment extends Fragment {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             RVHolder rvHolder = (RVHolder) holder;
-            Utils.log(this, position + "");
             rvHolder.setData(position);
         }
 

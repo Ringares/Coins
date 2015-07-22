@@ -2,6 +2,7 @@ package com.ringares.coins.utils;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.Toast;
 
@@ -35,6 +36,6 @@ public class Utils {
     public static void log(Object object, String log) {
         String className = object.getClass().toString();
         className = className.substring(className.lastIndexOf(".")+1);
-        System.out.println("Class: " + className + "-Log: " + log);
+        Log.e(className, log);
     }
 }
