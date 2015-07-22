@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ringares.coins.Application.MyApplication;
 import com.ringares.coins.R;
-import com.ringares.coins.application.MyApplication;
+import com.ringares.coins.utils.Utils;
 
 public class TimeLineFragment extends Fragment {
     private RecyclerViewAdapter adapter;
@@ -46,21 +47,23 @@ public class TimeLineFragment extends Fragment {
                 iv = (ImageView) view.findViewById(R.id.iv);
                 tv = (TextView) view.findViewById(R.id.tv);
             }
-            public void setData(int index){
-                tv.setText("      "+index);
+
+            public void setData(int index) {
+                tv.setText(index+"");
             }
         }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(MyApplication.context).inflate(R.layout.list_item,parent,false);
+            View view = LayoutInflater.from(MyApplication.context).inflate(R.layout.list_item, parent, false);
 
             return new RVHolder(view);
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            RVHolder rvHolder = (RVHolder)holder;
+            RVHolder rvHolder = (RVHolder) holder;
+            Utils.log(this, position + "");
             rvHolder.setData(position);
         }
 

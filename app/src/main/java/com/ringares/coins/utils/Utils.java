@@ -5,7 +5,8 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.widget.Toast;
 
-import com.ringares.coins.application.MyApplication;
+import com.ringares.coins.Application.MyApplication;
+
 
 /**
  * Created by ls
@@ -29,5 +30,11 @@ public class Utils {
     public static float dip2Pixel(float dip, Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, displayMetrics);
+    }
+
+    public static void log(Object object, String log) {
+        String className = object.getClass().toString();
+        className = className.substring(className.lastIndexOf(".")+1);
+        System.out.println("Class: " + className + "-Log: " + log);
     }
 }

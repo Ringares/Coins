@@ -1,5 +1,6 @@
 package com.ringares.coins.ui;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,8 +22,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.ringares.coins.R;
+import com.ringares.coins.utils.CircleImageDrawable;
 import com.ringares.coins.utils.Utils;
 
 import java.util.ArrayList;
@@ -46,13 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
         final ActionBar ab = getSupportActionBar();
         if(ab!=null){
-            ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headView = navigationView.inflateHeaderView(R.layout.nav_header);
+        ImageView headImage = (ImageView) headView.findViewById(R.id.iv);
+        headImage.setImageDrawable(new CircleImageDrawable(BitmapFactory.decodeResource(getResources(), R.drawable.ic_user)));
+
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
